@@ -5,8 +5,8 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Database connection
-require('./config/database');
+// Database connection - SQLite
+require('./config/sqlite');
 
 // Middleware
 app.use(cors({
@@ -37,5 +37,5 @@ app.use((req, res) => {
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Server is running on port ${PORT}`);
-    console.log(`📊 Database: ${process.env.DB_NAME}`);
+    console.log(`💾 Using SQLite database`);
 });
