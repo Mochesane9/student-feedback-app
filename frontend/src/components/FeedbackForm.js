@@ -60,7 +60,7 @@ function FeedbackForm() {
 
         setIsSubmitting(true);
         try {
-            const response = await axios.post('http://localhost:3001/api/feedback', formData);
+const response = await axios.post('https://student-feedback-app1.onrender.com/api/feedback', formData);
             alert('✅ Feedback submitted successfully!');
             
             // Reset form

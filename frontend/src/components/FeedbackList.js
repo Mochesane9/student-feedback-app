@@ -21,7 +21,7 @@ function FeedbackList() {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this feedback?')) {
             try {
-                await axios.delete(`http://localhost:3001/api/feedback/${id}`);
+                const response = await axios.get('https://student-feedback-app1.onrender.com/api/feedback');
                 alert('Feedback deleted successfully');
                 fetchFeedback(); // Refresh the list
             } catch (error) {

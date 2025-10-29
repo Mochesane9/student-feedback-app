@@ -1,25 +1,24 @@
-const pool = require('../config/postgres');
+const db = require('../config/sqlite');
 
 class Feedback {
     static async create(feedbackData) {
-        const query = `
+        const stmt = db.prepare(`
             INSERT INTO Feedback (studentName, courseCode, comments, rating) 
-            VALUES ($1, $2, $3, $4) 
-            RETURNING id
-        `;
-        const values = [feedbackData.studentName, feedbackData.courseCode, feedbackData.comments, feedbackData.rating];
-        const result = await pool.query(query, values);
-        return { insertId: result.rows[0].id };
+            VALUES (?, ?, ?, ?)
+        `);
+        const result = stmt.run(feedbackData.studentName, feedbackData.courseCode, feedbackData.comments, feedbackData.rating);
+        return { insertId: result.lastInsertRowid };
     }
 
     static async getAll() {
-        const result = await pool.query('SELECT * FROM Feedback ORDER BY createdAt DESC');
-        return result.rows;
+        const stmt = db.prepare('SELECT * FROM Feedback ORDER BY createdAt DESC');
+        return stmt.all();
     }
 
     static async deleteById(id) {
-        const result = await pool.query('DELETE FROM Feedback WHERE id = $1', [id]);
-        return { affectedRows: result.rowCount };
+        const stmt = db.prepare('DELETE FROM Feedback WHERE id = ?');
+        const result = stmt.run(id);
+        return { affectedRows: result.changes };
     }
 }
 
