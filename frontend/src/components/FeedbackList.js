@@ -10,7 +10,7 @@ function FeedbackList() {
 
     const fetchFeedback = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/api/feedback');
+            const response = await axios.get('https://student-feedback-sqlite.onrender.com/api/feedback');
             setFeedback(response.data);
         } catch (error) {
             console.error('Error fetching feedback:', error);
@@ -21,9 +21,9 @@ function FeedbackList() {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this feedback?')) {
             try {
-                const response = await axios.get('https://student-feedback-app1.onrender.com/api/feedback');
+                await axios.delete(`https://student-feedback-sqlite.onrender.com/api/feedback/${id}`);
                 alert('Feedback deleted successfully');
-                fetchFeedback(); // Refresh the list
+                fetchFeedback();
             } catch (error) {
                 console.error('Error deleting feedback:', error);
                 alert('Error deleting feedback');

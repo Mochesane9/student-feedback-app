@@ -17,7 +17,6 @@ function FeedbackForm() {
             ...formData,
             [name]: value
         });
-        // Clear error when user starts typing
         if (errors[name]) {
             setErrors({
                 ...errors,
@@ -60,10 +59,9 @@ function FeedbackForm() {
 
         setIsSubmitting(true);
         try {
-const response = await axios.post('https://student-feedback-app1.onrender.com/api/feedback', formData);
+            const response = await axios.post('https://student-feedback-sqlite.onrender.com/api/feedback', formData);
             alert('✅ Feedback submitted successfully!');
             
-            // Reset form
             setFormData({
                 studentName: '',
                 courseCode: '',

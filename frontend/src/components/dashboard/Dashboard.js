@@ -14,7 +14,7 @@ function Dashboard() {
 
     const fetchDashboardData = async () => {
         try {
-            const response = await axios.get('/api/feedback');
+            const response = await axios.get('https://student-feedback-sqlite.onrender.com/api/feedback');
             const feedback = response.data;
             
             const totalFeedback = feedback.length;
@@ -46,7 +46,6 @@ function Dashboard() {
                 Dashboard Overview
             </h1>
             
-            {/* Statistics Cards */}
             <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
@@ -80,7 +79,6 @@ function Dashboard() {
                 </div>
             </div>
 
-            {/* Recent Feedback */}
             <div style={{
                 backgroundColor: 'white',
                 padding: '2rem',
