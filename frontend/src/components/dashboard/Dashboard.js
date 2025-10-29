@@ -14,7 +14,7 @@ function Dashboard() {
 
     const fetchDashboardData = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/api/feedback');
+            const response = await axios.get('/api/feedback');
             const feedback = response.data;
             
             const totalFeedback = feedback.length;
